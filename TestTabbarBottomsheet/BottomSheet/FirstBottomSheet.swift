@@ -235,19 +235,25 @@ class FirstBottomSheet: UIView, UITableViewDelegate, UITableViewDataSource, UICo
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var demoCollectionView: UICollectionView!
+    
+    @IBOutlet weak var viewButton: UIButton!
+    
         
     var nudges: [VCNudge] = [
         VCNudge(type: .default, title: "HDFC", description: "Check record", isActionable: false, actionButtonTitle: "view", actionLink: "", image: "", caption: "test", isDismissable: false, children: ["HDFC debited RS 50", "HDFC credited RS 30"]),
-        VCNudge(type: .default, title: "ICICI", description: "Check record", isActionable: false, actionButtonTitle: "view", actionLink: "", image: "", caption: "test", isDismissable: false, children: ["ICICI credited RS 150", "ICICI credited RS 100"])
-    ] // This will hold your VCNudge data
+        VCNudge(type: .default, title: "ICICI", description: "Check record", isActionable: false, actionButtonTitle: "view", actionLink: "", image: "", caption: "test", isDismissable: false, children: ["ICICI credited RS 150", "ICICI credited RS 100"]),
+        VCNudge(type: .default, title: "AXIS", description: "Check record", isActionable: false, actionButtonTitle: "view", actionLink: "", image: "", caption: "test", isDismissable: false, children: [])
+    ]
     
     
-    var selectedNudge: VCNudge? // This will hold the currently selected nudge for displaying children
+    var selectedNudge: VCNudge?
 
     private var panGesture: UIPanGestureRecognizer!
     
     var currentHeight: CGFloat = 300
-    let maxHeight: CGFloat = UIScreen.main.bounds.height * 2 / 4 // Two-thirds of the screen height
+    let maxHeight: CGFloat = UIScreen.main.bounds.height * 2 / 4
+    
+    var currentCollectionViewIndex: Int = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -289,12 +295,17 @@ class FirstBottomSheet: UIView, UITableViewDelegate, UITableViewDataSource, UICo
         tableView.register(nib, forCellReuseIdentifier: DemoTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-
-        // Add pan gesture
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        contentView.addGestureRecognizer(panGesture)
+        
+        // Initially hide the table view
+        tableView.isHidden = true
+        self.shouldHideTransactionBtn(isHidden: nudges[currentCollectionViewIndex].children.isEmpty)
     }
 
+    @IBAction func tapOnViewButton(_ sender: UIButton) {
+        swipeUpBottomSheet()
+    }
+    
+    
     private func loadViewFromXib() {
         let nib = UINib(nibName: "FirstBottomSheet", bundle: nil)
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
@@ -303,39 +314,33 @@ class FirstBottomSheet: UIView, UITableViewDelegate, UITableViewDataSource, UICo
         contentView = view
     }
 
-    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: self)
+    
+    private func swipeUpBottomSheet(){
+        UIView.animate(withDuration: 0.3) {
+            self.contentView.frame.size.height = self.maxHeight
+            self.contentView.frame.origin.y = self.bounds.height - self.maxHeight
+        }
+        currentHeight = 300
         
-        switch gesture.state {
-        case .changed:
-            let newHeight = currentHeight - translation.y
-            if newHeight >= 300 && newHeight <= maxHeight {
-                contentView.frame.size.height = newHeight
-                currentHeight = newHeight
-                contentView.frame.origin.y = self.bounds.height - newHeight
-            }
-        case .ended, .cancelled:
-            let velocity = gesture.velocity(in: self)
-            if velocity.y < 0 {
-                UIView.animate(withDuration: 0.3) {
-                    self.contentView.frame.size.height = self.maxHeight
-                    self.contentView.frame.origin.y = self.bounds.height - self.maxHeight
-                }
-                currentHeight = 300
-                
-            } else {
-                UIView.animate(withDuration: 0.3) {
-                    self.contentView.frame.size.height = 300
-                    self.contentView.frame.origin.y = self.bounds.height - 300
-                }
-                currentHeight = 300
-            }
-        default:
-            break
+        tableView.isHidden = false
+        
+        print("current idex \(currentCollectionViewIndex)")
+        
+        if currentCollectionViewIndex >= 0 && currentCollectionViewIndex < nudges.count {
+            selectedNudge = nudges[currentCollectionViewIndex]
+            tableView.reloadData()
         }
     }
     
-    
+    private func swipeDownBottomSheet(){
+        UIView.animate(withDuration: 0.3) {
+            self.contentView.frame.size.height = 300
+            self.contentView.frame.origin.y = self.bounds.height - 300
+        }
+        currentHeight = 300
+        
+        tableView.isHidden = true
+    }
     
 
     // TableView Delegates
@@ -357,7 +362,6 @@ class FirstBottomSheet: UIView, UITableViewDelegate, UITableViewDataSource, UICo
     
     
     
-    
     // Collection View Delegates
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nudges.count // Return the number of nudges
@@ -367,7 +371,10 @@ class FirstBottomSheet: UIView, UITableViewDelegate, UITableViewDataSource, UICo
         let cell = demoCollectionView.dequeueReusableCell(withReuseIdentifier: DemoCollectionViewCell.identifier, for: indexPath) as! DemoCollectionViewCell
         
         let nudge = nudges[indexPath.row]
-        cell.configure(with: nudge.title, designation: nudge.description ?? "") // Adjust as necessary
+        cell.configure(with: nudge.title, designation: nudge.description ?? "")
+        
+        currentCollectionViewIndex = indexPath.row
+        
         
         return cell
     }
@@ -383,9 +390,40 @@ class FirstBottomSheet: UIView, UITableViewDelegate, UITableViewDataSource, UICo
         let width = scrollView.frame.size.width
         
         let currentIndex = Int(round(offset / width))
+        
+        currentCollectionViewIndex = currentIndex
+        
         if currentIndex >= 0 && currentIndex < nudges.count {
             selectedNudge = nudges[currentIndex]
             tableView.reloadData()
+        }
+    
+        self.shouldHideTransactionBtn(isHidden: self.nudges[currentIndex].children.isEmpty)
+    }
+    
+    
+    private func shouldHideTransactionBtn(isHidden: Bool){
+        viewButton.isHidden = isHidden
+    }
+}
+
+extension FirstBottomSheet: UIScrollViewDelegate {
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity.x < 0 {
+            guard scrollView == demoCollectionView else { return }
+                    
+            let offset = scrollView.contentOffset.x
+            let width = scrollView.frame.size.width
+            
+            let indexToGoTo = Int(round(offset / width)) - 1
+            
+            if indexToGoTo < self.nudges.count - 1 {
+                if let frame = self.demoCollectionView.layoutAttributesForItem(at: IndexPath(item: indexToGoTo, section: 0))?.frame {
+                    targetContentOffset.pointee = CGPoint(x: frame.origin.x, y: 0)
+                }
+                
+            }
         }
     }
 }

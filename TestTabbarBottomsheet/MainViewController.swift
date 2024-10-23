@@ -60,11 +60,16 @@ class MainViewController: UIViewController {
 
     private func openBottomSheet() {
         let targetY = view.frame.height - bottomSheetView.frame.height
-        print(targetY)
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.bottomSheetView.frame.origin.y = targetY
             self.bottomSheetView.contentView.frame.size.height = self.bottomSheetView.currentHeight
             self.bottomSheetView.contentView.frame.origin.y = self.bottomSheetView.bounds.height - self.bottomSheetView.currentHeight
+            
+            self.bottomSheetView.tableView.isHidden = true
+            
+            self.bottomSheetView.demoCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
+
         }, completion: { [self] _ in
             MainViewController.isBottomSheetOpen = true
         })
@@ -72,10 +77,10 @@ class MainViewController: UIViewController {
 
     private func closeBottomSheet() {
         let targetY = view.frame.height + 300
-        print(targetY)
 
         UIView.animate(withDuration: 0.3, animations: {
             self.bottomSheetView.frame.origin.y = targetY
+            self.bottomSheetView.tableView.isHidden = true
         }, completion: { _ in
             MainViewController.isBottomSheetOpen = false
         })
