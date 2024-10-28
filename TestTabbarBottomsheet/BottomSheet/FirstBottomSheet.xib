@@ -22,11 +22,11 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zWC-mH-9cc">
-                    <rect key="frame" x="0.0" y="50" width="431" height="495"/>
+                    <rect key="frame" x="0.0" y="50" width="431" height="479"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="NLO-m5-AG0">
-                    <rect key="frame" x="0.0" y="555" width="431" height="100"/>
+                    <rect key="frame" x="0.0" y="539" width="431" height="100"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="VWa-KF-tcX"/>
@@ -43,7 +43,7 @@
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="View Transactions"/>
                     <connections>
-                        <action selector="tapOnViewButton:" destination="-1" eventType="touchUpInside" id="bJR-Dw-pNU"/>
+                        <action selector="tapOnViewButton:" destination="-1" eventType="touchUpInside" id="N9h-nx-2PE"/>
                     </connections>
                 </button>
             </subviews>
@@ -53,7 +53,7 @@
                 <constraint firstItem="NLO-m5-AG0" firstAttribute="top" secondItem="zWC-mH-9cc" secondAttribute="bottom" constant="10" id="1or-d6-4GA"/>
                 <constraint firstItem="q2H-v0-4SO" firstAttribute="centerX" secondItem="lTg-8b-fgr" secondAttribute="centerX" id="71S-9S-KwY"/>
                 <constraint firstItem="NLO-m5-AG0" firstAttribute="leading" secondItem="Blt-nZ-Zwf" secondAttribute="leading" id="7F6-hG-t4E"/>
-                <constraint firstItem="Blt-nZ-Zwf" firstAttribute="bottom" secondItem="NLO-m5-AG0" secondAttribute="bottom" constant="10" id="GlY-Be-Qnj"/>
+                <constraint firstItem="Blt-nZ-Zwf" firstAttribute="bottom" secondItem="NLO-m5-AG0" secondAttribute="bottom" constant="26" id="GlY-Be-Qnj"/>
                 <constraint firstItem="Blt-nZ-Zwf" firstAttribute="trailing" secondItem="zWC-mH-9cc" secondAttribute="trailing" id="acn-hK-1I8"/>
                 <constraint firstItem="q2H-v0-4SO" firstAttribute="top" secondItem="lTg-8b-fgr" secondAttribute="top" constant="5" id="dsB-sz-bIp"/>
                 <constraint firstItem="zWC-mH-9cc" firstAttribute="top" secondItem="q2H-v0-4SO" secondAttribute="bottom" constant="10" id="f4M-Tw-xye"/>

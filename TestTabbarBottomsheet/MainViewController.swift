@@ -67,6 +67,7 @@ class MainViewController: UIViewController {
             self.bottomSheetView.contentView.frame.origin.y = self.bottomSheetView.bounds.height - self.bottomSheetView.currentHeight
             
             self.bottomSheetView.tableView.isHidden = true
+            self.bottomSheetView.viewButton.isHidden = false
             
             self.bottomSheetView.demoCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
 
@@ -81,6 +82,7 @@ class MainViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.bottomSheetView.frame.origin.y = targetY
             self.bottomSheetView.tableView.isHidden = true
+            self.bottomSheetView.isOpenBottomsheet = false
         }, completion: { _ in
             MainViewController.isBottomSheetOpen = false
         })
