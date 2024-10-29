@@ -21,6 +21,10 @@
 		E756E2BA2CBE9304007938C8 /* DemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E756E2B82CBE9304007938C8 /* DemoTableViewCell.xib */; };
 		E756E2BE2CC23165007938C8 /* DemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756E2BC2CC23165007938C8 /* DemoCollectionViewCell.swift */; };
 		E756E2BF2CC23165007938C8 /* DemoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E756E2BD2CC23165007938C8 /* DemoCollectionViewCell.xib */; };
+		E79E03442CCF9B98004A9423 /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79E03422CCF9B98004A9423 /* SelectDateViewController.swift */; };
+		E79E03452CCF9B98004A9423 /* SelectDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E79E03432CCF9B98004A9423 /* SelectDateViewController.xib */; };
+		E79E03492CD0ED26004A9423 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79E03472CD0ED26004A9423 /* ThirdViewController.swift */; };
+		E79E034A2CD0ED26004A9423 /* ThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E79E03482CD0ED26004A9423 /* ThirdViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		E756E2B82CBE9304007938C8 /* DemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoTableViewCell.xib; sourceTree = "<group>"; };
 		E756E2BC2CC23165007938C8 /* DemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCollectionViewCell.swift; sourceTree = "<group>"; };
 		E756E2BD2CC23165007938C8 /* DemoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DemoCollectionViewCell.xib; sourceTree = "<group>"; };
+		E79E03422CCF9B98004A9423 /* SelectDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
+		E79E03432CCF9B98004A9423 /* SelectDateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateViewController.xib; sourceTree = "<group>"; };
+		E79E03472CD0ED26004A9423 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		E79E03482CD0ED26004A9423 /* ThirdViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThirdViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,8 @@
 		E7185B7F2CB3B01B00E39E31 /* TestTabbarBottomsheet */ = {
 			isa = PBXGroup;
 			children = (
+				E79E03462CD0ECEC004A9423 /* ThirdViewController */,
+				E79E03412CCF9B2C004A9423 /* SelectDateViewController */,
 				E756E2BB2CC2311D007938C8 /* collectionViewCell */,
 				E756E2B62CBE92D9007938C8 /* tableviewCell */,
 				E7185B9C2CB3F76200E39E31 /* BottomSheet */,
@@ -113,6 +123,24 @@
 				E756E2BD2CC23165007938C8 /* DemoCollectionViewCell.xib */,
 			);
 			path = collectionViewCell;
+			sourceTree = "<group>";
+		};
+		E79E03412CCF9B2C004A9423 /* SelectDateViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E79E03422CCF9B98004A9423 /* SelectDateViewController.swift */,
+				E79E03432CCF9B98004A9423 /* SelectDateViewController.xib */,
+			);
+			path = SelectDateViewController;
+			sourceTree = "<group>";
+		};
+		E79E03462CD0ECEC004A9423 /* ThirdViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E79E03472CD0ED26004A9423 /* ThirdViewController.swift */,
+				E79E03482CD0ED26004A9423 /* ThirdViewController.xib */,
+			);
+			path = ThirdViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,11 +203,13 @@
 			files = (
 				E756E2BA2CBE9304007938C8 /* DemoTableViewCell.xib in Resources */,
 				E756E2BF2CC23165007938C8 /* DemoCollectionViewCell.xib in Resources */,
+				E79E03452CCF9B98004A9423 /* SelectDateViewController.xib in Resources */,
 				E7185B9B2CB3B36900E39E31 /* SecondViewController.xib in Resources */,
 				E7185B8D2CB3B01E00E39E31 /* LaunchScreen.storyboard in Resources */,
 				E7185B972CB3B28700E39E31 /* MainViewController.xib in Resources */,
 				E7185B8A2CB3B01E00E39E31 /* Assets.xcassets in Resources */,
 				E7185BA22CB3F7DD00E39E31 /* FirstBottomSheet.xib in Resources */,
+				E79E034A2CD0ED26004A9423 /* ThirdViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,11 +221,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E756E2BE2CC23165007938C8 /* DemoCollectionViewCell.swift in Sources */,
+				E79E03492CD0ED26004A9423 /* ThirdViewController.swift in Sources */,
 				E756E2B92CBE9304007938C8 /* DemoTableViewCell.swift in Sources */,
 				E7185B9A2CB3B36900E39E31 /* SecondViewController.swift in Sources */,
 				E7185B962CB3B28700E39E31 /* MainViewController.swift in Sources */,
 				E7185B812CB3B01B00E39E31 /* AppDelegate.swift in Sources */,
 				E7185B832CB3B01B00E39E31 /* SceneDelegate.swift in Sources */,
+				E79E03442CCF9B98004A9423 /* SelectDateViewController.swift in Sources */,
 				E7185BA02CB3F7BF00E39E31 /* FirstBottomSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

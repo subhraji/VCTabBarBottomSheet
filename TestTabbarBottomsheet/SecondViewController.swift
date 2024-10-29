@@ -9,6 +9,8 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
+    @IBOutlet weak var selectDateButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,4 +32,38 @@ class SecondViewController: UIViewController {
         navigationItem.title = "Vantage circle"
     }
 
+    @IBAction func tapOnSelectButton(_ sender: UIButton) {
+        //navigateToSelectDateView()
+        navigateToThirdView()
+    }
+    
+    private func navigateToThirdView(){
+        let thirdVc = ThirdViewController()
+        navigationController?.pushViewController(thirdVc, animated: true)
+    }
+    
+    private func navigateToSelectDateView(){
+        let minimumDay = -2
+        let maximumDay = 2
+        
+        let selectDateVC = SelectDateViewController(minimumDay: minimumDay, maximumDay: maximumDay)
+        
+        selectDateVC.onDateSelected = { selectedDate in
+            if let date = selectedDate {
+                print("Selected Date: \(self.printDate(selectedDate: date))")
+            } else {
+                print("No date selected")
+            }
+        }
+        
+        navigationController?.pushViewController(selectDateVC, animated: true)
+    }
+    
+    
+    private func printDate(selectedDate: Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        let formattedDate = dateFormatter.string(from: selectedDate)
+        return formattedDate
+    }
 }
